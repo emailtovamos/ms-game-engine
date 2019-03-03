@@ -57,3 +57,5 @@ func (g *Grpc) ListenAndServe() error {
 
 	return nil
 }
+
+// Create a package which will do the work of getting recent 4 scores and recommending size based on that.
