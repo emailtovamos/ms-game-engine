@@ -1,4 +1,3 @@
-package main
 // Connect to storage serve to get latest 4 scores
 // If the trend is worse bestscore then return larger size of shape to make the game less difficult
 // If the trend is improved bestscore then return smaller size of shape to make the game more difficult
@@ -7,8 +6,27 @@ package main
 // THEN add logic to connect to storage service once storage service is up and running
 
 // ms-game-engine opens a server so that when it gets a GetSize request, it returns size of shape: height, width
-// Only border-radius, height and width matter 
+// Only border-radius, height and width matter
 // Border radius (50% - circle, 0% - rectangle) may or may not be decided on the client side
+package main
+
+import (
+	"flag"
+	"github.com/rs/zerolog/log"
+	grpcSetup "github.com/teach/ms-game-engine/internal/server/grpc"
+)
+
 func main() {
+
+	var addressPtr = flag.String("address", "localhost:60051", "address where you can connect with ms-game-engine service")
+
+	flag.Parse()
+
+	s := grpcSetup.NewServer(*addressPtr)
+
+	// start gRPC server
+	if err := s.ListenAndServe(); err != nil {
+		log.Fatal().Err(err).Msg("failed to start gRPC server")
+	}
 
 }
