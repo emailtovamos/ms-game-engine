@@ -7,6 +7,7 @@ import (
 	pbgameengine "github.com/teach/ms-apis/ms-game-engine/v1"
 	"google.golang.org/grpc"
 	"net"
+	"github.com/teach/ms-game-engine/internal/server/logic"
 )
 
 type Grpc struct {
@@ -27,8 +28,9 @@ func NewServer(address string) *Grpc {
 // GetHighScore returns the highscore from the HighScore variable
 func (g *Grpc) GetSize(ctx context.Context, input *pbgameengine.GetSizeRequest) (*pbgameengine.GetSizeResponse, error) {
 	log.Info().Msg("GetSize in ms-game-engine called")
+	sizeLogic := logic.GetSize()
 	return &pbgameengine.GetSizeResponse{
-		Size: Size, // For now this is a test size to see if connection happens correctly when the frontend calls it
+		Size: sizeLogic, // For now this is a test size to see if connection happens correctly when the frontend calls it
 	}, nil
 
 }
