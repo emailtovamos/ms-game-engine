@@ -31,7 +31,5 @@ RUN apk --no-cache add tzdata
 
 COPY --from=0 /go/bin/${CLI_TYPE} ./binary
 
-EXPOSE 8000
-
 CMD ./binary
 
