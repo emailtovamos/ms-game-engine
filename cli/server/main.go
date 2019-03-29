@@ -13,7 +13,7 @@ package main
 import (
 	"flag"
 	"github.com/rs/zerolog/log"
-	grpcSetup "github.com/teach/ms-game-engine/internal/server/grpc"
+	grpcSetup "github.com/emailtovamos/ms-game-engine/internal/server/grpc"
 )
 
 func main() {

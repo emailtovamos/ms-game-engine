@@ -4,10 +4,10 @@ import (
 	"context"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
-	pbgameengine "github.com/teach/ms-apis/ms-game-engine/v1"
+	pbgameengine "github.com/emailtovamos/ms-apis/ms-game-engine/v1"
 	"google.golang.org/grpc"
 	"net"
-	"github.com/teach/ms-game-engine/internal/server/logic"
+	"github.com/emailtovamos/ms-game-engine/internal/server/logic"
 )
 
 type Grpc struct {
