@@ -1,8 +1,9 @@
+#docker build --no-cache -t ms-game-engine:latest .
 # 1st stage: build Go binary
 
 FROM golang:1.10
 # TODO: Insert your repo name
-WORKDIR /go/src/github.com/teach/ms-game-engine/
+WORKDIR /go/src/github.com/emailtovamos/ms-game-engine/
 
 # Copy only Go package directories each separately
 COPY vendor ./vendor/
@@ -16,7 +17,6 @@ RUN CGO_ENABLED=0        \
     go install           \
       -a                 \
       -installsuffix cgo \
-      --ldflags="-s"     \
       ./cli/${CLI_TYPE:?}
 
 
@@ -24,12 +24,13 @@ RUN CGO_ENABLED=0        \
 
 FROM alpine:latest
 WORKDIR /app/
-RUN apk --no-cache add ca-certificates
-RUN apk --no-cache add tzdata 
+# RUN apk --no-cache add ca-certificates
+# RUN apk --no-cache add tzdata 
 
 # Copy the binary from the first build stage
-
+ARG CLI_TYPE=server
 COPY --from=0 /go/bin/${CLI_TYPE} ./binary
 
 CMD ./binary
+# CMD ["server"]
 

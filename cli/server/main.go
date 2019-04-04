@@ -12,13 +12,15 @@ package main
 
 import (
 	"flag"
-	"github.com/rs/zerolog/log"
 	grpcSetup "github.com/emailtovamos/ms-game-engine/internal/server/grpc"
+	"github.com/rs/zerolog/log"
 )
 
 func main() {
 
-	var addressPtr = flag.String("address", "localhost:60051", "address where you can connect with ms-game-engine service")
+	var addressPtr = flag.String("address", ":60051", "address where you can connect with ms-game-engine service")
+	// Following is a reason why :60051 is used as address instead of localhost:60051
+	// https://stackoverflow.com/questions/43911793/cannot-connect-to-go-grpc-server-running-in-local-docker-container
 
 	flag.Parse()
 
