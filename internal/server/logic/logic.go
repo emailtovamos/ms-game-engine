@@ -17,3 +17,9 @@ func Average() float64 {
 	average := sum / float64(len(pastFourScores))
 	return average
 }
+
+func SetScore(a float64) bool {
+	pastFourScores = append(pastFourScores, a)
+	pastFourScores = pastFourScores[1:]
+	return true
+}

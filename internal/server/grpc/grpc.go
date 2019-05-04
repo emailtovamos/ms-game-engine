@@ -2,12 +2,12 @@ package grpc
 
 import (
 	"context"
+	pbgameengine "github.com/emailtovamos/ms-apis/ms-game-engine/v1"
+	"github.com/emailtovamos/ms-game-engine/internal/server/logic"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
-	pbgameengine "github.com/emailtovamos/ms-apis/ms-game-engine/v1"
 	"google.golang.org/grpc"
 	"net"
-	"github.com/emailtovamos/ms-game-engine/internal/server/logic"
 )
 
 type Grpc struct {
@@ -31,6 +31,16 @@ func (g *Grpc) GetSize(ctx context.Context, input *pbgameengine.GetSizeRequest) 
 	sizeLogic := logic.GetSize()
 	return &pbgameengine.GetSizeResponse{
 		Size: sizeLogic, // For now this is a test size to see if connection happens correctly when the frontend calls it
+	}, nil
+
+}
+
+// SetScore saves a score in ms-game-engine
+func (g *Grpc) SetScore(ctx context.Context, input *pbgameengine.SetScoreRequest) (*pbgameengine.SetScoreResponse, error) {
+	log.Info().Msg("GetSize in ms-game-engine called")
+	set := logic.SetScore(input.Score)
+	return &pbgameengine.SetScoreResponse{
+		Set: set,
 	}, nil
 
 }
